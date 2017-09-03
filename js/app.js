@@ -4,7 +4,10 @@ var imageOption = function (filename, name){
   this.name = name;
   this.tally = 0;
   this.filename = filename;
+  this.label = name;
+  this.y = 0;
   // this.y = Math.floor(Math.random() * 10);
+
 }
 
 var images = [];
@@ -33,9 +36,6 @@ function addImage(imageFileName, index) {
   image.dataset.index = index;
   image.addEventListener("click", recordClick);
   container.appendChild(image);
-
-
-
 }
 
 
@@ -72,7 +72,9 @@ addImage ("images/" +images[index3].filename, index3);
 
 var recordClick = function(event) {
 clickTotal++;
-images[event.target.dataset.index].tally++; //increments tally
+images[event.target.dataset.index].tally++;
+images[event.target.dataset.index].y++; //increments tally
+ //increments tally
 
   console.log(images[event.target.dataset.index]);
 
@@ -80,18 +82,46 @@ if(clickTotal == 15) {
   document.getElementById("image-container").innerHTML = "";
   // var product = document.getElementById("result");
   // product.removeEventListener("click",recordClick);
-  var list =document.getElementById("favorite-list");
-  for (var i = 0; i < images.length; i++) {
-    var li = document.createElement("li");
-    li.innerText = images[i].name + " was clicked " + images[i].tally + " times";
+//   var list =document.getElementById("favorite-list");
+//   for (var i = 0; i < images.length; i++) {
+//     var li = document.createElement("li");
+//     li.innerText = images[i].name + " was clicked " + images[i].tally + " times";
+//
+//     list.appendChild(li);
+// }
+var chart = new CanvasJS.Chart("chartContainer",
+{
+  title:{
+    text: "Busmall Product Chart"
+  },
+  animationEnabled: true,
+  axisY: {
+    title: "Clicks"
+  },
+  legend: {
+    verticalAlign: "bottom",
+    horizontalAlign: "center"
+  },
+  theme: "theme2",
+  data: [
 
-    list.appendChild(li);
+  {
+    type: "column",
+    showInLegend: true,
+    legendMarkerColor: "grey",
+    // legendText: "MMbbl = one million barrels",
+    dataPoints: images
+
+  }
+  ]
+});
+
+chart.render();
 }
-}
+
  else {
   showImages();
 }
-
 
 
 
