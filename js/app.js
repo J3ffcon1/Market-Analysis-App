@@ -71,48 +71,30 @@ addImage ("images/" +images[index3].filename, index3);
 
 
 var recordClick = function(event) {
-
 clickTotal++;
+images[event.target.dataset.index].tally++; //increments tally
 
-var imageSource = event.target.src;
-
-
-  console.log(event);
-  images[event.target.dataset.index].tally++; //increments tally
   console.log(images[event.target.dataset.index]);
 
 if(clickTotal == 15) {
   document.getElementById("image-container").innerHTML = "";
-  var product = document.getElementById("result");
-  product.removeEventListener("click",recordClick);
+  // var product = document.getElementById("result");
+  // product.removeEventListener("click",recordClick);
+  var list =document.getElementById("favorite-list");
+  for (var i = 0; i < images.length; i++) {
+    var li = document.createElement("li");
+    li.innerText = images[i].name + " was clicked " + images[i].tally + " times";
 
-} else{
+    list.appendChild(li);
+}
+}
+ else {
   showImages();
 }
 
-}
-
-function clicksCycles(){
-  if(clickTotal == 15) {
-    document.getElementById("image-container").innerHTML = "";
-    var product = document.getElementById("result");
-    product.removeEventListener("click",recordClick);
-
-  }else{
-    showImages();
-  }
 
 
 
-
-
-var list =document.getElementById("favorite-list");
-for (var i = 0; i < images.length; i++) {
-  var li = document.createElement("li");
-  li.innerText = images[i].name + " was clicked" + images[i].tally + "times";
-
-  list.appendChild(li);
-}
 console.log(images[event.target.dataset.index]);
 
 }
