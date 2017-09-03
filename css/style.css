@@ -1,15 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Sanchez');
+
+
 h1 {
   font-size: 30px;
   text-align: center;
+  font-family: 'Sanchez', sans-serif;
 
+}
+h2 {
+  text-align: center;
+  font-style: italic;
+}
+
+body {
+  background-color: #aaff80;
 }
 
 #image-container {
   display: flex;
   justify-content: space-around;
+  padding-right: 10px;
 }
 
 #image-container img{
   height: 300px;
 
+}
+
+.btn {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 20px;
+  border-radius: 9px;
+  font-family: 'Sanchez', sans-serif;
+  color: #42a7f4 ;
+  padding: 10px;
+  text-align: center;
+  margin: auto;
 }

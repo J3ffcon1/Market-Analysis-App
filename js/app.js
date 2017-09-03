@@ -1,17 +1,48 @@
-var imageNames = ["bag.jpg","banana.jpg","boots.jpg","chair.jpg","cthulhu.jpg","dragon.jpg","pen.jpg","scissors.jpg","shark.jpg","sweep.jpg","unicorn.jpg","usb.jpg","water_can.jpg","wine_glass.jpg","diffuser.jpg", "hat.jpg"];
-var imageAlt =  []
+var clickTotal = 0;
 
-function addImage(imageFileName) {
+var imageOption = function (filename, name){
+  this.name = name;
+  this.tally = 0;
+  this.filename = filename;
+  // this.y = Math.floor(Math.random() * 10);
+}
+
+var images = [];
+images.push(new imageOption("bag.jpg", "Bag"));
+images.push(new imageOption("banana.jpg", "Banana"));
+images.push(new imageOption("boots.jpg", "Boots"));
+images.push(new imageOption("chair.jpg", "Chair"));
+images.push(new imageOption("cthulhu.jpg", "Cthulu"));
+images.push(new imageOption("dragon.jpg", "Dragon"));
+images.push(new imageOption("pen.jpg", "Pen"));
+images.push(new imageOption("scissors.jpg", "Scissors"));
+images.push(new imageOption("shark.jpg", "Shark"));
+images.push(new imageOption("unicorn.jpg", "Unicorn"));
+images.push(new imageOption("usb.jpg", "USB"));
+images.push(new imageOption("water_can.jpg", "Water Can"));
+images.push(new imageOption("wine_glass.jpg", "Wine Glass"));
+images.push(new imageOption("diffuser.jpg", "Diffuser"));
+images.push(new imageOption("hat.jpg", "Hat"));
+
+//use data attribute
+
+function addImage(imageFileName, index) {
   var container =document.getElementById("image-container");
   var image = document.createElement("img");
   image.src = imageFileName;
+  image.dataset.index = index;
   image.addEventListener("click", recordClick);
   container.appendChild(image);
+
+
+
 }
 
 
 function showImages() {
-
+var container = document.getElementById("image-container");
+console.dir(container);
+container.innerHTML = "";
 
 var index1 = 0
 var index2 = 0
@@ -21,16 +52,17 @@ var index3 = 0
 while(index1 == index2 || index2 == index3 || index3 == index1) {
 
 
-index1 = Math.floor(Math.random() * imageNames.length);
-index2 = Math.floor(Math.random() * imageNames.length);
-index3 = Math.floor(Math.random() * imageNames.length);
+index1 = Math.floor(Math.random() * images.length);
+index2 = Math.floor(Math.random() * images.length);
+index3 = Math.floor(Math.random() * images.length);
 
 
 }
 
-addImage ("images/" +imageNames[index1]) ;
-addImage ("images/" +imageNames[index2]) ;
-addImage ("images/" +imageNames[index3]) ;
+
+addImage ("images/" +images[index1].filename, index1);
+addImage ("images/" +images[index2].filename, index2);
+addImage ("images/" +images[index3].filename, index3);
 
 
 }
@@ -38,10 +70,50 @@ addImage ("images/" +imageNames[index3]) ;
 //Think about using while loop.
 
 
-function recordClick(event) {
+var recordClick = function(event) {
+
+clickTotal++;
 
 var imageSource = event.target.src;
-  console.log("image was clicked!" + src);
+
+
+  console.log(event);
+  images[event.target.dataset.index].tally++; //increments tally
+  console.log(images[event.target.dataset.index]);
+
+if(clickTotal == 15) {
+  document.getElementById("image-container").innerHTML = "";
+  var product = document.getElementById("result");
+  product.removeEventListener("click",recordClick);
+
+} else{
+  showImages();
+}
+
+}
+
+function clicksCycles(){
+  if(clickTotal == 15) {
+    document.getElementById("image-container").innerHTML = "";
+    var product = document.getElementById("result");
+    product.removeEventListener("click",recordClick);
+
+  }else{
+    showImages();
+  }
+
+
+
+
+
+var list =document.getElementById("favorite-list");
+for (var i = 0; i < images.length; i++) {
+  var li = document.createElement("li");
+  li.innerText = images[i].name + " was clicked" + images[i].tally + "times";
+
+  list.appendChild(li);
+}
+console.log(images[event.target.dataset.index]);
 
 }
 //When you click on the image you are going to see the name.
