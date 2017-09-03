@@ -4,7 +4,10 @@ var imageOption = function (filename, name){
   this.name = name;
   this.tally = 0;
   this.filename = filename;
+  this.label = name;
+  this.y = 0;
   // this.y = Math.floor(Math.random() * 10);
+
 }
 
 var images = [];
@@ -33,9 +36,6 @@ function addImage(imageFileName, index) {
   image.dataset.index = index;
   image.addEventListener("click", recordClick);
   container.appendChild(image);
-
-
-
 }
 
 
@@ -72,7 +72,9 @@ addImage ("images/" +images[index3].filename, index3);
 
 var recordClick = function(event) {
 clickTotal++;
-images[event.target.dataset.index].tally++; //increments tally
+images[event.target.dataset.index].tally++;
+images[event.target.dataset.index].y++; //increments tally
+ //increments tally
 
   console.log(images[event.target.dataset.index]);
 
@@ -108,30 +110,14 @@ var chart = new CanvasJS.Chart("chartContainer",
     showInLegend: true,
     legendMarkerColor: "grey",
     // legendText: "MMbbl = one million barrels",
-    dataPoints: [
-    {y: 297571, label: "Bag"},
-    {y: 267017,  label: "Banana" },
-    {y: 175200,  label: "Boots"},
-    {y: 154580,  label: "Chair"},
-    {y: 116000,  label: "Cthulu"},
-    {y: 97800, label: "Dragon"},
-    {y: 20682,  label: "Pen"},
-    {y: 20350,  label: "Scissors"},
-    {y: 20350,  label: "Shark"},
-    {y: 20350,  label: "Unicorn"},
-    {y: 20350,  label: "USB"},
-    {y: 20350,  label: "Water Can"},
-    {y: 20350,  label: "Wine Glass"},
-    {y: 20350,  label: "Diffuser"},
-    {y: 20350,  label: "Hat"},
-    ]
+    dataPoints: images
+
   }
   ]
 });
 
 chart.render();
 }
-
 
  else {
   showImages();
