@@ -80,18 +80,62 @@ if(clickTotal == 15) {
   document.getElementById("image-container").innerHTML = "";
   // var product = document.getElementById("result");
   // product.removeEventListener("click",recordClick);
-  var list =document.getElementById("favorite-list");
-  for (var i = 0; i < images.length; i++) {
-    var li = document.createElement("li");
-    li.innerText = images[i].name + " was clicked " + images[i].tally + " times";
+//   var list =document.getElementById("favorite-list");
+//   for (var i = 0; i < images.length; i++) {
+//     var li = document.createElement("li");
+//     li.innerText = images[i].name + " was clicked " + images[i].tally + " times";
+//
+//     list.appendChild(li);
+// }
+var chart = new CanvasJS.Chart("chartContainer",
+{
+  title:{
+    text: "Busmall Product Chart"
+  },
+  animationEnabled: true,
+  axisY: {
+    title: "Clicks"
+  },
+  legend: {
+    verticalAlign: "bottom",
+    horizontalAlign: "center"
+  },
+  theme: "theme2",
+  data: [
 
-    list.appendChild(li);
+  {
+    type: "column",
+    showInLegend: true,
+    legendMarkerColor: "grey",
+    // legendText: "MMbbl = one million barrels",
+    dataPoints: [
+    {y: 297571, label: "Bag"},
+    {y: 267017,  label: "Banana" },
+    {y: 175200,  label: "Boots"},
+    {y: 154580,  label: "Chair"},
+    {y: 116000,  label: "Cthulu"},
+    {y: 97800, label: "Dragon"},
+    {y: 20682,  label: "Pen"},
+    {y: 20350,  label: "Scissors"},
+    {y: 20350,  label: "Shark"},
+    {y: 20350,  label: "Unicorn"},
+    {y: 20350,  label: "USB"},
+    {y: 20350,  label: "Water Can"},
+    {y: 20350,  label: "Wine Glass"},
+    {y: 20350,  label: "Diffuser"},
+    {y: 20350,  label: "Hat"},
+    ]
+  }
+  ]
+});
+
+chart.render();
 }
-}
+
+
  else {
   showImages();
 }
-
 
 
 
