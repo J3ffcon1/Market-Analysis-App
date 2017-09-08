@@ -6,7 +6,6 @@ var imageOption = function (filename, name){
   this.filename = filename;
   this.label = name;
   this.y = 0;
-  // this.y = Math.floor(Math.random() * 10);
 
 }
 
@@ -80,16 +79,44 @@ images[event.target.dataset.index].y++; //increments tally
 
 if(clickTotal == 15) {
   document.getElementById("image-container").innerHTML = "";
-  // var product = document.getElementById("result");
-  // product.removeEventListener("click",recordClick);
-//   var list =document.getElementById("favorite-list");
-//   for (var i = 0; i < images.length; i++) {
-//     var li = document.createElement("li");
-//     li.innerText = images[i].name + " was clicked " + images[i].tally + " times";
-//
-//     list.appendChild(li);
-// }
-var chart = new CanvasJS.Chart("chartContainer",
+
+chartRender();
+}
+
+ else {
+  showImages();
+}
+
+var pBar = document.getElementById("progressBar");
+// pBar.style.display = "block";
+var chart = document.getElementById("chartContainer");
+
+
+if (pBar.value < 14) {
+  pBar.value = clickTotal;
+  pBar.style.display = "block";
+
+}
+else {
+
+  pBar.style.display = "none";
+  chart.style.visibility = "visible";
+  // chart.classList.remove("hide");
+
+}
+
+
+
+
+console.log(images[event.target.dataset.index]);
+console.log(clickTotal);
+
+}
+
+
+function chartRender() {
+
+  var chart = new CanvasJS.Chart("chartContainer",
 {
   title:{
     text: "Busmall Product Chart"
@@ -114,20 +141,27 @@ var chart = new CanvasJS.Chart("chartContainer",
 
   }
   ]
-});
-
+})
 chart.render();
-}
+};
 
- else {
+
+var Button = document.getElementById('reloadbutton');
+Button.addEventListener("click", nextRound);
+
+function nextRound () {
+  var pBar = document.getElementById("progressBar");
+  var chart = document.getElementById("chartContainer");
+  pBar.style.display = "block";
+  chart.style.visibility = "hidden";
+  // chart.classList.add("hide");
+  chartRender();
+  pBar.value = "";
+  clickTotal = 0;
+  console.log(clickTotal);
   showImages();
 }
 
-
-
-console.log(images[event.target.dataset.index]);
-
-}
 //When you click on the image you are going to see the name.
 
 window.addEventListener("load", showImages);
