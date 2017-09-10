@@ -10,21 +10,21 @@ var imageOption = function (filename, name){
 }
 
 var images = [];
-images.push(new imageOption("bag.jpg", "Bag"));
-images.push(new imageOption("banana.jpg", "Banana"));
-images.push(new imageOption("boots.jpg", "Boots"));
-images.push(new imageOption("chair.jpg", "Chair"));
-images.push(new imageOption("cthulhu.jpg", "Cthulu"));
-images.push(new imageOption("dragon.jpg", "Dragon"));
-images.push(new imageOption("pen.jpg", "Pen"));
-images.push(new imageOption("scissors.jpg", "Scissors"));
-images.push(new imageOption("shark.jpg", "Shark"));
-images.push(new imageOption("unicorn.jpg", "Unicorn"));
-images.push(new imageOption("usb.jpg", "USB"));
-images.push(new imageOption("water_can.jpg", "Water Can"));
-images.push(new imageOption("wine_glass.jpg", "Wine Glass"));
-images.push(new imageOption("diffuser.jpg", "Diffuser"));
-images.push(new imageOption("hat.jpg", "Hat"));
+// images.push(new imageOption("bag.jpg", "Bag"));
+// images.push(new imageOption("banana.jpg", "Banana"));
+// images.push(new imageOption("boots.jpg", "Boots"));
+// images.push(new imageOption("chair.jpg", "Chair"));
+// images.push(new imageOption("cthulhu.jpg", "Cthulu"));
+// images.push(new imageOption("dragon.jpg", "Dragon"));
+// images.push(new imageOption("pen.jpg", "Pen"));
+// images.push(new imageOption("scissors.jpg", "Scissors"));
+// images.push(new imageOption("shark.jpg", "Shark"));
+// images.push(new imageOption("unicorn.jpg", "Unicorn"));
+// images.push(new imageOption("usb.jpg", "USB"));
+// images.push(new imageOption("water_can.jpg", "Water Can"));
+// images.push(new imageOption("wine_glass.jpg", "Wine Glass"));
+// images.push(new imageOption("diffuser.jpg", "Diffuser"));
+// images.push(new imageOption("hat.jpg", "Hat"));
 
 //use data attribute
 
@@ -80,10 +80,14 @@ images[event.target.dataset.index].y++; //increments tally
 if(clickTotal == 15) {
   document.getElementById("image-container").innerHTML = "";
 
+localStorage.setItem("chartInfo", JSON.stringify(images));
+
 chartRender();
+
 }
 
  else {
+
   showImages();
 }
 
@@ -162,6 +166,33 @@ function nextRound () {
   showImages();
 }
 
+function showLocalStorage() {
+  if (localStorage.getItem("chartInfo") != null) {
+    images = JSON.parse(localStorage.getItem("chartInfo"));
+
+  } else {
+
+    images.push(new imageOption("bag.jpg", "Bag"));
+    images.push(new imageOption("banana.jpg", "Banana"));
+    images.push(new imageOption("boots.jpg", "Boots"));
+    images.push(new imageOption("chair.jpg", "Chair"));
+    images.push(new imageOption("cthulhu.jpg", "Cthulu"));
+    images.push(new imageOption("dragon.jpg", "Dragon"));
+    images.push(new imageOption("pen.jpg", "Pen"));
+    images.push(new imageOption("scissors.jpg", "Scissors"));
+    images.push(new imageOption("shark.jpg", "Shark"));
+    images.push(new imageOption("unicorn.jpg", "Unicorn"));
+    images.push(new imageOption("usb.jpg", "USB"));
+    images.push(new imageOption("water_can.jpg", "Water Can"));
+    images.push(new imageOption("wine_glass.jpg", "Wine Glass"));
+    images.push(new imageOption("diffuser.jpg", "Diffuser"));
+    images.push(new imageOption("hat.jpg", "Hat"));
+
+  }
+  showImages();
+}
+
 //When you click on the image you are going to see the name.
 
-window.addEventListener("load", showImages);
+//window.addEventListener("load", showImages);
+window.addEventListener("load", showLocalStorage);
