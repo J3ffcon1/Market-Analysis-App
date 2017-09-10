@@ -1,4 +1,4 @@
-var clickTotal = 0;
+ var clickTotal = 0;
 
 var imageOption = function (filename, name){
   this.name = name;
