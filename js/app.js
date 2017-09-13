@@ -35,6 +35,7 @@ function addImage(imageFileName, index) {
   image.dataset.index = index;
   image.addEventListener("click", recordClick);
   container.appendChild(image);
+
 }
 
 
@@ -63,7 +64,6 @@ function showImages() {
   addImage ("images/" +images[index2].filename, index2);
   addImage ("images/" +images[index3].filename, index3);
 
-
 }
 //showImages is going to reference the images folder and pick one image at random from images folder.
 //Think about using while loop.
@@ -83,12 +83,20 @@ var recordClick = function(event) {
     localStorage.setItem("chartInfo", JSON.stringify(images));
 
     chartRender();
-
   }
 
   else {
+    var container =document.getElementById("image-container");
 
     showImages();
+    container.classList.remove("Fadein");
+    setTimeout(function () {
+        container.classList.add("Fadein");
+
+
+    }, 250
+  )
+
   }
 
   var pBar = document.getElementById("progressBar");
@@ -190,6 +198,14 @@ function showLocalStorage() {
 
   }
   showImages();
+  setTimeout(function () {
+      document.getElementById("image-container").classList.add("Fadein");
+
+
+  }, 250
+)
+
+
 }
 
 //When you click on the image you are going to see the name.

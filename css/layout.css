@@ -1,0 +1,22 @@
+/*adding transitions to images.*/
+
+
+#image-container {
+  opacity: 0;
+}
+
+#image-container.Fadein {
+  opacity: 1;
+  transition: opacity .25s;
+}
+
+
+
+
+#reloadbutton:hover {
+  color: red;
+}
+#reloadbutton {
+  transition: color .25s;
+
+}
