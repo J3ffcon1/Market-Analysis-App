@@ -1,4 +1,4 @@
- var clickTotal = 0;
+var clickTotal = 0;
 
 var imageOption = function (filename, name){
   this.name = name;
@@ -39,29 +39,29 @@ function addImage(imageFileName, index) {
 
 
 function showImages() {
-var container = document.getElementById("image-container");
-console.dir(container);
-container.innerHTML = "";
+  var container = document.getElementById("image-container");
+  console.dir(container);
+  container.innerHTML = "";
 
-var index1 = 0
-var index2 = 0
-var index3 = 0
-
-
-while(index1 == index2 || index2 == index3 || index3 == index1) {
+  var index1 = 0
+  var index2 = 0
+  var index3 = 0
 
 
-index1 = Math.floor(Math.random() * images.length);
-index2 = Math.floor(Math.random() * images.length);
-index3 = Math.floor(Math.random() * images.length);
+  while(index1 == index2 || index2 == index3 || index3 == index1) {
 
 
-}
+    index1 = Math.floor(Math.random() * images.length);
+    index2 = Math.floor(Math.random() * images.length);
+    index3 = Math.floor(Math.random() * images.length);
 
 
-addImage ("images/" +images[index1].filename, index1);
-addImage ("images/" +images[index2].filename, index2);
-addImage ("images/" +images[index3].filename, index3);
+  }
+
+
+  addImage ("images/" +images[index1].filename, index1);
+  addImage ("images/" +images[index2].filename, index2);
+  addImage ("images/" +images[index3].filename, index3);
 
 
 }
@@ -70,50 +70,50 @@ addImage ("images/" +images[index3].filename, index3);
 
 
 var recordClick = function(event) {
-clickTotal++;
-images[event.target.dataset.index].tally++;
-images[event.target.dataset.index].y++; //increments tally
- //increments tally
+  clickTotal++;
+  images[event.target.dataset.index].tally++;
+  images[event.target.dataset.index].y++; //increments tally
+  //increments tally
 
   console.log(images[event.target.dataset.index]);
 
-if(clickTotal == 15) {
-  document.getElementById("image-container").innerHTML = "";
+  if(clickTotal == 15) {
+    document.getElementById("image-container").innerHTML = "";
 
-localStorage.setItem("chartInfo", JSON.stringify(images));
+    localStorage.setItem("chartInfo", JSON.stringify(images));
 
-chartRender();
+    chartRender();
 
-}
+  }
 
- else {
+  else {
 
-  showImages();
-}
+    showImages();
+  }
 
-var pBar = document.getElementById("progressBar");
-// pBar.style.display = "block";
-var chart = document.getElementById("chartContainer");
-
-
-if (pBar.value < 14) {
-  pBar.value = clickTotal;
-  pBar.style.display = "block";
-
-}
-else {
-
-  pBar.style.display = "none";
-  chart.style.visibility = "visible";
-  // chart.classList.remove("hide");
-
-}
+  var pBar = document.getElementById("progressBar");
+  // pBar.style.display = "block";
+  var chart = document.getElementById("chartContainer");
 
 
+  if (pBar.value < 14) {
+    pBar.value = clickTotal;
+    pBar.style.display = "block";
+
+  }
+  else {
+
+    pBar.style.display = "none";
+    chart.style.visibility = "visible";
+    // chart.classList.remove("hide");
+
+  }
 
 
-console.log(images[event.target.dataset.index]);
-console.log(clickTotal);
+
+
+  console.log(images[event.target.dataset.index]);
+  console.log(clickTotal);
 
 }
 
@@ -121,32 +121,32 @@ console.log(clickTotal);
 function chartRender() {
 
   var chart = new CanvasJS.Chart("chartContainer",
-{
-  title:{
-    text: "Busmall Product Chart"
-  },
-  animationEnabled: true,
-  axisY: {
-    title: "Clicks"
-  },
-  legend: {
-    verticalAlign: "bottom",
-    horizontalAlign: "center"
-  },
-  theme: "theme2",
-  data: [
-
   {
-    type: "column",
-    showInLegend: true,
-    legendMarkerColor: "grey",
-    // legendText: "MMbbl = one million barrels",
-    dataPoints: images
+    title:{
+      text: "Busmall Product Chart"
+    },
+    animationEnabled: true,
+    axisY: {
+      title: "Clicks"
+    },
+    legend: {
+      verticalAlign: "bottom",
+      horizontalAlign: "center"
+    },
+    theme: "theme2",
+    data: [
 
-  }
-  ]
-})
-chart.render();
+      {
+        type: "column",
+        showInLegend: true,
+        legendMarkerColor: "grey",
+        // legendText: "MMbbl = one million barrels",
+        dataPoints: images
+
+      }
+    ]
+  })
+  chart.render();
 };
 
 
