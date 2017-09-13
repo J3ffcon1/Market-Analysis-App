@@ -113,6 +113,7 @@ var recordClick = function(event) {
 
     pBar.style.display = "none";
     chart.style.visibility = "visible";
+    
     // chart.classList.remove("hide");
 
   }
@@ -154,7 +155,9 @@ function chartRender() {
       }
     ]
   })
+
   chart.render();
+
 };
 
 

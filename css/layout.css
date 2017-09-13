@@ -1,5 +1,9 @@
 /*adding transitions to images.*/
 
+#image-container img:hover {
+opacity: 0.5;
+filter: alpha(opacity=50);
+}
 
 #image-container {
   opacity: 0;
@@ -9,6 +13,8 @@
   opacity: 1;
   transition: opacity .25s;
 }
+
+
 
 
 
